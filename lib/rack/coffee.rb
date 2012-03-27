@@ -39,9 +39,9 @@ module Rack
 
     def brew(file)
       if cache_compile_dir
-        path = cache_compile_dir + file.dirname
-        path.mkpath
-        cache_file = path + "#{file.mtime.to_i}_#{file.basename}"
+        cache_path = cache_compile_dir + file.dirname.relative_path_from(root)
+        cache_path.mkpath
+        cache_file = cache_path + "#{file.mtime.to_i}_#{file.basename}"
         if cache_file.file?
           cache_file.read
         else
