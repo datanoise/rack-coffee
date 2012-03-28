@@ -22,7 +22,9 @@ module Rack
       @concat_to_file = opts.fetch(:join, false)
       @concat_to_file += '.coffee' if @concat_to_file
       @cache_compile_dir = if opts.fetch(:cache_compile, false)
-        Pathname.new(Dir.mktmpdir)
+        Pathname.new(opts.fetch(:cache_dir, Dir.mktmpdir)).tap do |p|
+          p.mkpath unless p.exist?
+        end
       else
         nil
       end
@@ -40,7 +42,7 @@ module Rack
     def brew(file)
       if cache_compile_dir
         cache_path = cache_compile_dir + file.dirname.relative_path_from(root)
-        cache_path.mkpath
+        cache_path.mkpath unless cache_path.exist?
         cache_file = cache_path + "#{file.mtime.to_i}_#{file.basename}"
         if cache_file.file?
           cache_file.read
