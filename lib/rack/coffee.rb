@@ -43,7 +43,7 @@ module Rack
       if cache_compile_dir
         cache_path = cache_compile_dir + file.dirname.relative_path_from(root)
         cache_path.mkpath unless cache_path.exist?
-        cache_file = cache_path + "#{file.mtime.to_i}_#{file.basename}"
+        cache_file = cache_path + "#{file.mtime.to_i}_#{file.basename.sub_ext('.js')}"
         if cache_file.file?
           cache_file.read
         else
