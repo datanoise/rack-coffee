@@ -47,6 +47,9 @@ module Rack
         if cache_file.file?
           cache_file.read
         else
+          cache_path.children
+            .select{|c| c.to_s.ends_with?(file.basename.sub_ext('.js'))}
+            .each(&:unlink)
           brewed = compile(file.read)
           cache_file.open('w') {|f| f << brewed }
           brewed
