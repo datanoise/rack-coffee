@@ -12,7 +12,6 @@ Gem::Specification.new do |s|
   s.files = [".gitignore", "Gemfile", "Gemfile.lock", "Rakefile", "Readme.mkdn", "lib/rack/coffee.rb", "rack-coffee.gemspec", "test/javascripts/cache_compile.coffee", "test/javascripts/static.js", "test/javascripts/test.coffee", "test/other_javascripts/test.coffee", "test/rack_coffee_test.rb"]
   s.homepage = %q{http://github.com/mattly/rack-coffee}
   s.require_paths = ["lib"]
-  s.rubyforge_project = %q{rack-coffee}
   s.rubygems_version = %q{1.6.2}
   s.summary = %q{serve up coffeescript from rack middleware}
   s.test_files = ["test/rack_coffee_test.rb"]
